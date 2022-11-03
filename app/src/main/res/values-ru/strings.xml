@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amino</string>
+    <string name="amino_logo">Логотип Amino</string>
+    <string name="login_to_the_account">Вход в аккаунт</string>
+    <string name="version">Версия %1$s</string>
+    <string name="language">RU</string>
+    <string name="email">Почта</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="password">Пароль</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="login">Войти</string>
+    <string name="ad_warning_title">Предупреждение</string><string name="ad_warning_message">
+        Автор этого приложения ни каким образом не связан с Амино.
+        Ответсвенность за любые баны и санкции с вашим аккаунтом вы берёте на себя</string>
+    <string name="ad_cancel">Отменить</string>
+</resources>

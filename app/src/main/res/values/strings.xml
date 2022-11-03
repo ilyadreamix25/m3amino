@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Globals -->
+    <string name="app_name">Amino</string>
+    <string name="language">EN</string>
+
+    <!-- Login -->
+    <string name="amino_logo">Amino logo</string>
+    <string name="login_to_the_account">Login to the account</string>
+    <string name="amino_by_ilyadreamix" translatable="false">Amino by IlyaDreamix</string>
+    <string name="version">Version %1$s</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter email</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password</string>
+    <string name="login">Login</string>
+
+    <!-- Alert dialog -->
+    <string name="ad_warning_title">Warning</string>
+    <string name="ad_warning_message">Amino is a registered trademark of Medialab (Narvii).
+        All trademarks referenced here are the properties of their respective owners.
+        This app is provided \"AS IS\", only for educational purposes, without warranty of any kind.
+        Developer is not responsible for any loss or damage from its use, including banned accounts
+    </string>
+    <string name="ad_ok" translatable="false">OK</string>
+    <string name="ad_cancel">Cancel</string>
+</resources>
