@@ -36,10 +36,8 @@
             android:textSize="22sp"
             android:text="@string/login_to_the_account"/>
 
-        <!-- Text fields -->
-
+        <!-- Email text field -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_email_text_field"
             android:layout_marginTop="16dp"
             style="@style/RoundTextField"
             app:startIconDrawable="@drawable/ic_email"
@@ -47,6 +45,7 @@
             app:placeholderText="@string/enter_email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_email_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -54,8 +53,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Password text field -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_password_text_field"
             android:layout_marginTop="13dp"
             style="@style/RoundTextField"
             app:startIconDrawable="@drawable/ic_password"
@@ -65,6 +64,7 @@
             app:passwordToggleTint="?colorOnSurfaceVariant">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_password_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -73,7 +73,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Login button -->
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
             android:layout_width="match_parent"

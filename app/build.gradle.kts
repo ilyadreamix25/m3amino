@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 android {
@@ -39,14 +40,39 @@ android {
     }
 }
 
+/** Dependencies **/
+
+// UI
 val appCompatVersion: String by rootProject.extra
 val materialVersion: String by rootProject.extra
 val constraintLayoutVersion: String by rootProject.extra
+
+// Coroutines
 val coreKtxVersion: String by rootProject.extra
+val lifecycleVersion: String by rootProject.extra
+val coroCoreVersion: String by rootProject.extra
+
+// HTTP
+val retrofitVersion: String by rootProject.extra
+val okHttp3LogVersion: String by rootProject.extra
 
 dependencies {
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("androidx.core:core-ktx:${coreKtxVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
+
+    // Live data and view model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}")
+    kapt("androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroCoreVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroCoreVersion}")
+
+    // Retrofit and OkHTTP3
+    implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}")
+    implementation("com.squareup.retrofit2:converter-gson:${retrofitVersion}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${okHttp3LogVersion}")
 }
