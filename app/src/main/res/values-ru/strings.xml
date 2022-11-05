@@ -4,8 +4,8 @@
     <string name="amino_logo">Логотип Amino</string>
     <string name="login_to_the_account">Вход в аккаунт</string>
     <string name="version">Версия %1$s</string>
-    <string name="language">RU</string>
-    <string name="ndc_language">ru-RU</string>
+    <string name="language">ru-RU</string>
+    <string name="ndc_language">RU</string>
     <string name="email">Почта</string>
     <string name="enter_email">Введите почту</string>
     <string name="password">Пароль</string>
@@ -21,4 +21,16 @@
         за ущерб или по иным требованиям, в том числе за забаненные аккаунты</string>
     <string name="ad_cancel">Отменить</string>
     <string name="ad_login_error">Ошибка входа</string>
+    <string name="debug_title">Отладка</string>
+    <string name="debug_device_id">ID девайса</string>
+    <string name="debug_sid">ID сессии</string>
+    <string name="debug_user_id">ID пользователя</string>
+    <string name="debug_default">Отсутствует</string>
+    <string name="debug_brand">Бренд</string>
+    <string name="debug_board">Процессор</string>
+    <string name="debug_manufacturer">Производитель</string>
+    <string name="debug_model">Модель</string>
+    <string name="debug_product">Продукт</string>
+    <string name="debug_amino_info">Информация Amino</string>
+    <string name="debug_device_info">Информация о девайсе</string>
 </resources>

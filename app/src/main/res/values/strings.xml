@@ -16,6 +16,21 @@
     <string name="enter_password">Enter password</string>
     <string name="login">Login</string>
 
+    <!-- Debug activity -->
+    <string name="debug_title">Debug</string>
+    <string name="debug_ua" translatable="false">User-Agent</string>
+    <string name="debug_device_id">Device ID</string>
+    <string name="debug_sid">Session ID</string>
+    <string name="debug_user_id">User ID</string>
+    <string name="debug_default">None</string>
+    <string name="debug_amino_info">Amino information</string>
+    <string name="debug_device_info">Device information</string>
+    <string name="debug_brand">Brand</string>
+    <string name="debug_board">Board</string>
+    <string name="debug_manufacturer">Manufacturer</string>
+    <string name="debug_model">Model</string>
+    <string name="debug_product">Product</string>
+
     <!-- Alert dialog -->
     <string name="ad_warning_title">Warning</string>
     <string name="ad_warning_message">Amino is a registered trademark of Medialab (Narvii).

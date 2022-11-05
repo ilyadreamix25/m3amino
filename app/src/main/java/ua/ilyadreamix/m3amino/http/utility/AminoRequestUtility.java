@@ -17,8 +17,9 @@ public final class AminoRequestUtility {
         byte[] value,
         byte[] key
     ) {
-        HmacUtils hmac = new HmacUtils(HmacAlgorithms.HMAC_SHA_1, key);
-        return hmac.hmacHex(value);
+        HmacUtils hmacUtils = new HmacUtils(HmacAlgorithms.HMAC_SHA_1, key);
+        byte[] hmacDigest = hmacUtils.hmac(value);
+        return new String(Hex.encodeHex(hmacDigest));
     }
 
     private static byte[] hmacSha1Digest(
@@ -31,33 +32,33 @@ public final class AminoRequestUtility {
 
     public static String generateDeviceId() throws DecoderException {
         byte[] data = new byte[20];
-        byte[] key = Hex.decodeHex(DEVICE_KEY);
+        byte[] key = Hex.decodeHex(DEVICE_KEY.toCharArray());
 
         new Random().nextBytes(data);
 
         String mac = hmacSha1Hex(
             ArrayUtils.addAll(
-                Hex.decodeHex("42"),
+                Hex.decodeHex("42".toCharArray()),
                 data
             ),
             key
         );
 
         return ("42" +
-            Hex.encodeHexString(data) +
+            new String(Hex.encodeHex(data)) +
             mac).toUpperCase();
     }
 
     public static String generateSig(String data) throws DecoderException {
         byte[] byteData = data.getBytes();
-        byte[] key = Hex.decodeHex(SIG_KEY);
+        byte[] key = Hex.decodeHex(SIG_KEY.toCharArray());
         byte[] mac = hmacSha1Digest(
             byteData, key
         );
 
         byte[] b64Bytes = Base64.encodeBase64(
             ArrayUtils.addAll(
-                Hex.decodeHex("42"),
+                Hex.decodeHex("42".toCharArray()),
                 mac
             )
         );

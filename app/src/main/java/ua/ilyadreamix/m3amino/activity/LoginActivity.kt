@@ -1,6 +1,8 @@
 package ua.ilyadreamix.m3amino.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
@@ -20,6 +22,7 @@ import ua.ilyadreamix.m3amino.http.request.ResponseState
 class LoginActivity: M3AminoActivity() {
 
     private var enabled = true
+    private var debugMenuCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,17 @@ class LoginActivity: M3AminoActivity() {
         val loginButton = findViewById<MaterialCardView>(R.id.login_button)
         loginButton.setOnClickListener {
             showWarning()
+        }
+
+        val bottomLayout = findViewById<LinearLayout>(R.id.login_bottom_layout)
+        bottomLayout.setOnClickListener {
+            if (debugMenuCounter < 5) debugMenuCounter++
+            else {
+                debugMenuCounter = 0
+
+                val intent = Intent(this, DebugActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -54,7 +68,7 @@ class LoginActivity: M3AminoActivity() {
                 showLoginError(loginResponse.error!!.message)
 
             setEnabled()
-            setLoading()
+            setLoadingButton()
         }
     }
 
@@ -66,7 +80,7 @@ class LoginActivity: M3AminoActivity() {
         enabled = !enabled
     }
 
-    private fun setLoading() {
+    private fun setLoadingButton() {
         val button = findViewById<MaterialCardView>(R.id.login_button)
         val buttonCPI = button.findViewById<CircularProgressIndicator>(R.id.loading_button_cpi)
 
@@ -87,7 +101,7 @@ class LoginActivity: M3AminoActivity() {
             }
             .setPositiveButton(getString(R.string.ad_ok)) { _, _ ->
                 setEnabled()
-                setLoading()
+                setLoadingButton()
                 login()
             }
             .setCancelable(false)
@@ -95,15 +109,13 @@ class LoginActivity: M3AminoActivity() {
     }
 
     private fun showLoginError(message: String) {
-        val dialog = MaterialAlertDialogBuilder(this)
-
-        dialog.setTitle(getString(R.string.ad_login_error))
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.ad_login_error))
             .setMessage(message)
             .setPositiveButton(getString(R.string.ad_ok)) { _, _ ->
                 // Dismiss
             }
             .setCancelable(false)
-
-        dialog.show()
+            .show()
     }
 }

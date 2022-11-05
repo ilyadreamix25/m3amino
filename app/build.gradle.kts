@@ -9,7 +9,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk    = 21
+        minSdk = 27
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
         versionCode = 1
