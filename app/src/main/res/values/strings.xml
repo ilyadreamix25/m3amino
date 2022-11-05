@@ -3,6 +3,7 @@
     <!-- Globals -->
     <string name="app_name">Amino</string>
     <string name="language">EN</string>
+    <string name="ndc_language">en-US</string>
 
     <!-- Login -->
     <string name="amino_logo">Amino logo</string>

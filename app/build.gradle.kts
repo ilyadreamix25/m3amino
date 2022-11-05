@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -75,4 +75,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}")
     implementation("com.squareup.retrofit2:converter-gson:${retrofitVersion}")
     implementation("com.squareup.okhttp3:logging-interceptor:${okHttp3LogVersion}")
+
+    // Hash utilities
+    implementation("com.google.guava:guava:31.0.1-jre")
+    implementation("commons-codec:commons-codec:1.15")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }

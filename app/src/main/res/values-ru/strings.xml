@@ -5,6 +5,7 @@
     <string name="login_to_the_account">Вход в аккаунт</string>
     <string name="version">Версия %1$s</string>
     <string name="language">RU</string>
+    <string name="ndc_language">ru-RU</string>
     <string name="email">Почта</string>
     <string name="enter_email">Введите почту</string>
     <string name="password">Пароль</string>

@@ -2,56 +2,39 @@ package ua.ilyadreamix.m3amino.http.request
 
 import com.google.gson.Gson
 import ua.ilyadreamix.m3amino.http.RetrofitInstance
-import ua.ilyadreamix.m3amino.http.model.BasicResponse
-import ua.ilyadreamix.m3amino.http.model.LoginByEmailRequest
-import ua.ilyadreamix.m3amino.http.model.LoginEmailResponse
-import ua.ilyadreamix.m3amino.http.service.LoginService
+import ua.ilyadreamix.m3amino.http.model.LoginByEmailRequestModel
+import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
+import ua.ilyadreamix.m3amino.http.service.AuthService
+import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 
 class AuthRequest(
-    private val deviceId: String,
-    private val userAgent: String = System.getProperty("http.agent") as String,
-    private val acceptLanguage: String = "en-US",
-    private val ndcLang: String = "en"
-) {
+    deviceId: String = AminoRequestUtility.generateDeviceId(),
+    userAgent: String = System.getProperty("http.agent") as String,
+    acceptLanguage: String = "ru-RU",
+    ndcLang: String = "RU"
+): BaseRequest(deviceId, userAgent, acceptLanguage, ndcLang) {
+
     private val service = RetrofitInstance
         .getRetrofitInstance()
-        .create(LoginService::class.java)
+        .create(AuthService::class.java)
 
-    class AuthResponse(
-        val state: ResponseState,
-        val error: BasicResponse?,
-        val data: LoginEmailResponse?
-    )
+    suspend fun loginByEmail(email: String, password: String): BaseResponse<LoginEmailResponseModelModel> {
+        val data = LoginByEmailRequestModel(
+            email,
+            "0 $password",
+            deviceId = deviceId
+        )
 
-    suspend fun loginByEmail(email: String, password: String): AuthResponse {
         val response = service
             .loginByEmail(
-                LoginByEmailRequest(
-                    email,
-                    "0 $password",
-                    deviceId = deviceId
-                ),
+                data,
                 userAgent,
                 acceptLanguage,
                 ndcLang,
                 deviceId,
-                ""
+                AminoRequestUtility.generateSig(Gson().toJson(data))
             )
 
-        return if (!response.isSuccessful) {
-            val body = response.errorBody()!!.charStream()
-
-            AuthResponse(
-                ResponseState.BAD,
-                Gson().fromJson(body, BasicResponse::class.java),
-                null
-            )
-        } else {
-            AuthResponse(
-                ResponseState.BAD,
-                null,
-                response.body()!!
-            )
-        }
+        return getFromResponse(response)
     }
 }

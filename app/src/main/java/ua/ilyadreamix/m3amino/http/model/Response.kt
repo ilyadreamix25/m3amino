@@ -2,17 +2,22 @@ package ua.ilyadreamix.m3amino.http.model
 
 import com.google.gson.annotations.SerializedName
 
-open class BasicResponse(
+open class BasicResponseModel(
     @SerializedName("api:statuscode")
     val statusCode: Int = -1,
     @SerializedName("api:message")
-    val message: String = ""
+    val message: String = "Unable to make an request"
 )
 
-data class LoginEmailResponse(
+data class LoginEmailResponseModelModel(
+    @SerializedName("auid")
     val auid: String?,
-    val account: Account?,
+    @SerializedName("account")
+    val accountModel: AccountModel?,
+    @SerializedName("secret")
     val secret: String?,
-    val userProfile: UserProfile?,
+    @SerializedName("userProfile")
+    val userProfileModel: UserProfileModel?,
+    @SerializedName("deviceId")
     val deviceId: String?
-): BasicResponse()
+): BasicResponseModel()
