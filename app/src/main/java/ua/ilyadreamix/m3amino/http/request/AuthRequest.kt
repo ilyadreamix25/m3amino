@@ -10,8 +10,8 @@ import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 class AuthRequest(
     deviceId: String = AminoRequestUtility.generateDeviceId(),
     userAgent: String = System.getProperty("http.agent") as String,
-    acceptLanguage: String = "ru-RU",
-    ndcLang: String = "RU"
+    acceptLanguage: String = "en-US",
+    ndcLang: String = "EN"
 ): BaseRequest(deviceId, userAgent, acceptLanguage, ndcLang) {
 
     private val service = RetrofitInstance

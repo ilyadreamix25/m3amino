@@ -56,6 +56,10 @@ val coroCoreVersion: String by rootProject.extra
 val retrofitVersion: String by rootProject.extra
 val okHttp3LogVersion: String by rootProject.extra
 
+// Hash
+val commonsCodecVersion: String by rootProject.extra
+val commonsLangVersion: String by rootProject.extra
+
 dependencies {
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
@@ -77,7 +81,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:${okHttp3LogVersion}")
 
     // Hash utilities
-    implementation("com.google.guava:guava:31.0.1-jre")
-    implementation("commons-codec:commons-codec:1.15")
-    implementation("org.apache.commons:commons-lang3:3.12.0")
+    implementation("commons-codec:commons-codec:${commonsCodecVersion}")
+    implementation("org.apache.commons:commons-lang3:${commonsLangVersion}")
 }
