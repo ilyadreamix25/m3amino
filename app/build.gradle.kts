@@ -46,6 +46,7 @@ android {
 val appCompatVersion: String by rootProject.extra
 val materialVersion: String by rootProject.extra
 val constraintLayoutVersion: String by rootProject.extra
+val loadingButtonVersion: String by rootProject.extra
 
 // Coroutines
 val coreKtxVersion: String by rootProject.extra
@@ -61,6 +62,7 @@ val commonsCodecVersion: String by rootProject.extra
 val commonsLangVersion: String by rootProject.extra
 
 dependencies {
+    // UI
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("androidx.core:core-ktx:${coreKtxVersion}")

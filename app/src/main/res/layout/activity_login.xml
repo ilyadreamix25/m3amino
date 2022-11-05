@@ -57,7 +57,8 @@
         <!-- Password text field -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_password_text_layout"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             style="@style/RoundTextField"
             app:startIconDrawable="@drawable/ic_password"
             android:hint="@string/password"
@@ -75,14 +76,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Login button -->
-        <com.google.android.material.button.MaterialButton
+        <include
             android:id="@+id/login_button"
+            layout="@layout/loading_button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            app:cornerRadius="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/login"/>
+            android:layout_height="56dp">
+        </include>
 
     </LinearLayout>
 

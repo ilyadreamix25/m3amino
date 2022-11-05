@@ -25,4 +25,5 @@
     </string>
     <string name="ad_ok" translatable="false">OK</string>
     <string name="ad_cancel">Cancel</string>
+    <string name="ad_login_error">Login error</string>
 </resources>
