@@ -33,4 +33,10 @@
     <string name="debug_product">Продукт</string>
     <string name="debug_amino_info">Информация Amino</string>
     <string name="debug_device_info">Информация о девайсе</string>
+    <string name="debug_app_info">Информация о приложении</string>
+    <string name="debug_is_debug">Отладка</string>
+    <string name="debug_package">Пакет</string>
+    <string name="debug_version">Версия</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

@@ -4,7 +4,7 @@ buildscript {
         set("appCompatVersion", "1.5.1")
         set("materialVersion", "1.7.0")
         set("constraintLayoutVersion", "2.1.4")
-        set("loadingButtonVersion", "2.2.0")
+        set("recyclerViewVersion", "1.2.1")
 
         // Coroutines
         set("coreKtxVersion", "1.9.0")

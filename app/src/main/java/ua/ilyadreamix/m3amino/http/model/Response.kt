@@ -11,13 +11,13 @@ open class BasicResponseModel(
 
 data class LoginEmailResponseModelModel(
     @SerializedName("auid")
-    val auid: String?,
+    val auid: String,
     @SerializedName("account")
-    val accountModel: AccountModel?,
+    val account: AccountModel,
     @SerializedName("secret")
-    val secret: String?,
+    val secret: String,
     @SerializedName("userProfile")
-    val userProfileModel: UserProfileModel?,
-    @SerializedName("deviceId")
-    val deviceId: String?
+    val userProfile: UserProfileModel,
+    @SerializedName("sid")
+    val sid: String
 ): BasicResponseModel()

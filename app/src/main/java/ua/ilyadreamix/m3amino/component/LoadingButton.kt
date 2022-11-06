@@ -9,23 +9,14 @@ class LoadingButton(
     private val buttonCPI: CircularProgressIndicator,
     private val shortAnimationDuration: Int
 ) {
-
-    private fun setCPIVisibility(
-        visible: Boolean = false,
-        onEnd: () -> Unit = {}
-    ) {
+    fun animateCPI(enabled: Boolean = false) {
         buttonCPI.animate()
-            .alpha(if (visible) 1f else 0f)
+            .alpha(if (enabled) 1f else 0f)
             .setDuration(shortAnimationDuration.toLong())
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    buttonCPI.visibility = if (visible) View.VISIBLE else View.GONE
-                    onEnd()
+                    buttonCPI.visibility = if (enabled) View.VISIBLE else View.GONE
                 }
             })
-    }
-
-    fun fullAnim(enabled: Boolean = false) {
-        setCPIVisibility(enabled)
     }
 }

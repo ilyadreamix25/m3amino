@@ -1,11 +1,12 @@
 package ua.ilyadreamix.m3amino.activity
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ua.ilyadreamix.m3amino.BuildConfig
+import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ActivityDebugBinding
 
-class DebugActivity : AppCompatActivity() {
+class DebugActivity : M3AminoActivity() {
 
     private lateinit var binding: ActivityDebugBinding
 
@@ -16,7 +17,9 @@ class DebugActivity : AppCompatActivity() {
         val view = binding.root
 
         setContentView(view)
+
         setDeviceInfo()
+        setAppInfo()
     }
 
     private fun setDeviceInfo() {
@@ -25,5 +28,15 @@ class DebugActivity : AppCompatActivity() {
         binding.debugManufacturer.text = Build.MANUFACTURER
         binding.debugModel.text = Build.MODEL
         binding.debugProduct.text = Build.PRODUCT
+    }
+
+    private fun setAppInfo() {
+        binding.debugIsDebug.text = if (BuildConfig.DEBUG) getString(R.string.yes)
+                                    else getString(R.string.no)
+        binding.debugPackage.text = BuildConfig.APPLICATION_ID
+        binding.debugVersion.text = getString(R.string.debug_version_text,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE
+        )
     }
 }

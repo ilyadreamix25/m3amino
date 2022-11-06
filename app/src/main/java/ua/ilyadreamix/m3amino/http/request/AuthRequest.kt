@@ -21,7 +21,7 @@ class AuthRequest(
     suspend fun loginByEmail(email: String, password: String): BaseResponse<LoginEmailResponseModelModel> {
         val data = LoginByEmailRequestModel(
             email,
-            "0 $password",
+            password,
             deviceId = deviceId
         )
 

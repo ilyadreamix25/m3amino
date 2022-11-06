@@ -18,6 +18,8 @@ import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
 import ua.ilyadreamix.m3amino.http.request.AuthRequest
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.ResponseState
+import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
+import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
 
 class LoginActivity: M3AminoActivity() {
 
@@ -51,21 +53,32 @@ class LoginActivity: M3AminoActivity() {
     private fun login() {
         val emailET = findViewById<TextInputEditText>(R.id.login_email_text_field)
         val passwordET = findViewById<TextInputEditText>(R.id.login_password_text_field)
+        val deviceId = AminoRequestUtility.generateDeviceId()
 
         val loginEmailLivedata: LiveData<BaseResponse<LoginEmailResponseModelModel>> = liveData {
             val response = AuthRequest(
+                deviceId = deviceId,
                 acceptLanguage = getString(R.string.language),
                 ndcLang = getString(R.string.ndc_language)
             ).loginByEmail(
                 emailET.text.toString(),
-                passwordET.text.toString()
+                "0 " + passwordET.text.toString()
             )
             emit(response)
         }
 
-        loginEmailLivedata.observe(this) { loginResponse ->
-            if (loginResponse.state == ResponseState.BAD)
-                showLoginError(loginResponse.error!!.message)
+        loginEmailLivedata.observe(this) {
+            if (it.state == ResponseState.BAD)
+                showLoginError(it.error!!.message)
+            else {
+                val sessionUtility = AminoSessionUtility(this)
+                sessionUtility.saveLoginData(
+                    it.data!!.secret,
+                    it.data.sid,
+                    deviceId,
+                    it.data.userProfile.uid!!
+                )
+            }
 
             setEnabled()
             setLoadingButton()
@@ -89,7 +102,7 @@ class LoginActivity: M3AminoActivity() {
             resources.getInteger(android.R.integer.config_shortAnimTime)
         )
 
-        loadingButton.fullAnim(!enabled)
+        loadingButton.animateCPI(!enabled)
     }
 
     private fun showWarning() {
@@ -97,7 +110,7 @@ class LoginActivity: M3AminoActivity() {
             .setTitle(getString(R.string.ad_warning_title))
             .setMessage(getString(R.string.ad_warning_message))
             .setNegativeButton(getString(R.string.ad_cancel)) { _, _ ->
-                // Cancel
+                // Dismiss
             }
             .setPositiveButton(getString(R.string.ad_ok)) { _, _ ->
                 setEnabled()

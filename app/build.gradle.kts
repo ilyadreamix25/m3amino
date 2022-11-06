@@ -9,11 +9,11 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 27
+        minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.05"
     }
 
     buildTypes {
@@ -46,7 +46,7 @@ android {
 val appCompatVersion: String by rootProject.extra
 val materialVersion: String by rootProject.extra
 val constraintLayoutVersion: String by rootProject.extra
-val loadingButtonVersion: String by rootProject.extra
+val recyclerViewVersion: String by rootProject.extra
 
 // Coroutines
 val coreKtxVersion: String by rootProject.extra
@@ -67,6 +67,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
     implementation("androidx.core:core-ktx:${coreKtxVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
+    implementation("androidx.recyclerview:recyclerview:${recyclerViewVersion}")
 
     // Live data and view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")
