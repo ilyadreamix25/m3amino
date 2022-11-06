@@ -6,6 +6,9 @@
     <string name="ndc_language">en-US</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="unexpected_error">Unexpected error. Contact the developer</string>
+    <string name="check_internet">Error! Check your internet connection</string>
+    <string name="three_dots" translatable="false">%1$s...</string>
 
     <!-- Login -->
     <string name="amino_logo">Amino logo</string>
@@ -19,13 +22,15 @@
     <string name="login">Login</string>
 
     <!-- Debug activity -->
-    <string name="debug_title">Debug</string>
+    <string name="debug_title">Debug menu</string>
     <string name="debug_ua" translatable="false">User-Agent</string>
     <string name="debug_device_id">Device ID</string>
     <string name="debug_sid">Session ID</string>
+    <string name="debug_secret">Secret</string>
     <string name="debug_user_id">User ID</string>
+    <string name="debug_last_login">Last login</string>
     <string name="debug_default">None</string>
-    <string name="debug_amino_info">Amino information</string>
+    <string name="debug_amino_info">Amino information (long press to copy)</string>
     <string name="debug_device_info">Device information</string>
     <string name="debug_brand">Brand</string>
     <string name="debug_board">Board</string>
@@ -37,6 +42,7 @@
     <string name="debug_is_debug">Debug</string>
     <string name="debug_package">Package</string>
     <string name="debug_version">Version</string>
+    <string name="debug_auth_status">Auth status</string>
 
     <!-- Alert dialog -->
     <string name="ad_warning_title">Warning</string>
@@ -44,6 +50,10 @@
         All trademarks referenced here are the properties of their respective owners.
         This app is provided \"AS IS\", only for educational purposes, without warranty of any kind.
         Developer is not responsible for any loss or damage from its use, including banned accounts
+    </string>
+    <string name="ad_warning_debug">You are entering the debug menu now.
+        Please do not distribute information from it.
+        This menu contains information about your account
     </string>
     <string name="ad_ok" translatable="false">OK</string>
     <string name="ad_cancel">Cancel</string>

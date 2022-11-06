@@ -31,7 +31,13 @@ class SplashActivity : M3AminoActivity() {
                 startActivity(intent)
                 finish()
             }
-            else -> Log.d("SplashActivity", "TODO")
+            else -> {
+                Log.d("SplashActivity", "TODO")
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

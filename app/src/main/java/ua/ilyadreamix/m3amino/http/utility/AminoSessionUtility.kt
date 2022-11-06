@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 class AminoSessionUtility(
     private val activity: AppCompatActivity
 ) {
-    private fun getSessionData(): AminoSession {
+    fun getSessionData(): AminoSession {
         val sp = activity.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
 
         val lastLogin = sp.getLong(SP_LAST_LOGIN, 0)

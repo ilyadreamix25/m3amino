@@ -2,25 +2,29 @@ package ua.ilyadreamix.m3amino.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
+import ua.ilyadreamix.m3amino.component.Alerts
 import ua.ilyadreamix.m3amino.component.LoadingButton
 import ua.ilyadreamix.m3amino.databinding.ActivityLoginBinding
-import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
+import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModel
 import ua.ilyadreamix.m3amino.http.request.AuthRequest
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.ResponseState
 import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+import java.net.UnknownHostException
 
 class LoginActivity: M3AminoActivity() {
 
     private var enabled = true
+    private var warningAccepted = false
     private var debugMenuCounter = 0
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var alerts: Alerts
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +37,27 @@ class LoginActivity: M3AminoActivity() {
     }
 
     private fun initialize() {
+        alerts = Alerts(this)
+
         binding.loginVersion.text = getString(R.string.version, BuildConfig.VERSION_NAME)
 
         binding.loginButton.root.setOnClickListener {
-            showWarning()
+            if (!warningAccepted) {
+                alerts.alertPositiveNegative(
+                    getString(R.string.ad_warning_title),
+                    getString(R.string.ad_warning_message),
+                    pOnClick = {
+                        setEnabled()
+                        setLoadingButton()
+                        login()
+                    }
+                )
+                warningAccepted = true
+            } else {
+                setEnabled()
+                setLoadingButton()
+                login()
+            }
         }
 
         binding.loginBottomLayout.setOnClickListener {
@@ -44,8 +65,14 @@ class LoginActivity: M3AminoActivity() {
             else {
                 debugMenuCounter = 0
 
-                val intent = Intent(this, DebugActivity::class.java)
-                startActivity(intent)
+                alerts.alertPositiveNegative(
+                    getString(R.string.ad_warning_title),
+                    getString(R.string.ad_warning_debug),
+                    pOnClick = {
+                        val intent = Intent(this, DebugActivity::class.java)
+                        startActivity(intent)
+                    }
+                )
             }
         }
     }
@@ -55,21 +82,40 @@ class LoginActivity: M3AminoActivity() {
         val passwordET = binding.loginPasswordTextField
         val deviceId = AminoRequestUtility.generateDeviceId()
 
-        val loginEmailLivedata: LiveData<BaseResponse<LoginEmailResponseModelModel>> = liveData {
-            val response = AuthRequest(
+        val loginEmailLivedata: LiveData<BaseResponse<LoginEmailResponseModel>> = liveData {
+            val requester = AuthRequest(
                 deviceId = deviceId,
                 acceptLanguage = getString(R.string.language),
                 ndcLang = getString(R.string.ndc_language)
-            ).loginByEmail(
-                emailET.text.toString(),
-                "0 " + passwordET.text.toString()
             )
-            emit(response)
+
+            try {
+                val response = requester.loginByEmail(
+                    emailET.text.toString(),
+                    "0 " + passwordET.text.toString()
+                )
+                emit(response)
+            } catch (_: UnknownHostException) {
+                setEnabled()
+                setLoadingButton()
+
+                alerts.alertToast(getString(R.string.check_internet))
+            } catch (error: Throwable) {
+                setEnabled()
+                setLoadingButton()
+
+                Log.e("LoginActivity", "Unexpected login request error", error)
+
+                alerts.alertToast(getString(R.string.unexpected_error))
+            }
         }
 
         loginEmailLivedata.observe(this) {
             if (it.state == ResponseState.BAD)
-                showLoginError(it.error!!.message)
+                alerts.alertOnePositive(
+                    getString(R.string.ad_login_error),
+                    it.error!!.message
+                )
             else {
                 val sessionUtility = AminoSessionUtility(this)
                 sessionUtility.saveLoginData(
@@ -100,32 +146,5 @@ class LoginActivity: M3AminoActivity() {
         )
 
         loadingButton.animateCPI(!enabled)
-    }
-
-    private fun showWarning() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.ad_warning_title))
-            .setMessage(getString(R.string.ad_warning_message))
-            .setNegativeButton(getString(R.string.ad_cancel)) { _, _ ->
-                // Dismiss
-            }
-            .setPositiveButton(getString(R.string.ad_ok)) { _, _ ->
-                setEnabled()
-                setLoadingButton()
-                login()
-            }
-            .setCancelable(false)
-            .show()
-    }
-
-    private fun showLoginError(message: String) {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.ad_login_error))
-            .setMessage(message)
-            .setPositiveButton(getString(R.string.ad_ok)) { _, _ ->
-                // Dismiss
-            }
-            .setCancelable(false)
-            .show()
     }
 }

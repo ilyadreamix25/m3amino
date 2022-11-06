@@ -9,7 +9,7 @@ open class BasicResponseModel(
     val message: String = "Unable to make an request"
 )
 
-data class LoginEmailResponseModelModel(
+data class LoginEmailResponseModel(
     @SerializedName("auid")
     val auid: String,
     @SerializedName("account")

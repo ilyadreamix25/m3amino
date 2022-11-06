@@ -3,7 +3,7 @@ package ua.ilyadreamix.m3amino.http.request
 import com.google.gson.Gson
 import ua.ilyadreamix.m3amino.http.RetrofitInstance
 import ua.ilyadreamix.m3amino.http.model.LoginByEmailRequestModel
-import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
+import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModel
 import ua.ilyadreamix.m3amino.http.service.AuthService
 import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 
@@ -18,7 +18,7 @@ class AuthRequest(
         .getRetrofitInstance()
         .create(AuthService::class.java)
 
-    suspend fun loginByEmail(email: String, password: String): BaseResponse<LoginEmailResponseModelModel> {
+    suspend fun loginByEmail(email: String, password: String): BaseResponse<LoginEmailResponseModel> {
         val data = LoginByEmailRequestModel(
             email,
             password,

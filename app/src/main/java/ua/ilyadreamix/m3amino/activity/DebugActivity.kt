@@ -1,10 +1,15 @@
 package ua.ilyadreamix.m3amino.activity
 
+import android.content.ClipData
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ActivityDebugBinding
+import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+
 
 class DebugActivity : M3AminoActivity() {
 
@@ -20,6 +25,49 @@ class DebugActivity : M3AminoActivity() {
 
         setDeviceInfo()
         setAppInfo()
+        setAminoInfo()
+    }
+
+    private fun setAminoInfo() {
+        val sessionUtility = AminoSessionUtility(this)
+        val sessionData = sessionUtility.getSessionData()
+
+        setProps(binding.debugUa, (System.getProperty("http.agent") as String))
+
+        sessionData.userId?.let {
+            setProps(binding.debugUserId, it)
+        }
+        sessionData.deviceId?.let {
+            setProps(binding.debugDeviceId, it)
+        }
+        sessionData.sessionId?.let {
+            setProps(binding.debugSid, it)
+        }
+        sessionData.secret?.let {
+            setProps(binding.debugSecret, it)
+        }
+
+        val lastLogin = sessionData.lastLogin.toString()
+
+        binding.debugLastLogin.text = lastLogin
+        binding.debugLastLogin.setOnLongClickListener {
+            copyText(lastLogin)
+            true
+        }
+    }
+
+    private fun setProps(view: TextView, text: String) {
+        view.text = getString(R.string.three_dots, text.substring(0, 22))
+        view.setOnLongClickListener {
+            copyText(text)
+            true
+        }
+    }
+
+    private fun copyText(text: String) {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        val clip = ClipData.newPlainText(null, text)
+        clipboard.setPrimaryClip(clip)
     }
 
     private fun setDeviceInfo() {
@@ -38,5 +86,6 @@ class DebugActivity : M3AminoActivity() {
             BuildConfig.VERSION_NAME,
             BuildConfig.VERSION_CODE
         )
+        binding.debugAuthStatus.text = AminoSessionUtility(this).getLoginStatus().toString()
     }
 }

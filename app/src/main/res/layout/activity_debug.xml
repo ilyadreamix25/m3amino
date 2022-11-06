@@ -51,21 +51,36 @@
                     android:layout_height="wrap_content"
                     android:text="@string/debug_ua"
                     android:textSize="16sp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_user_id"
                     android:textSize="16sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_device_id"
                     android:textSize="16sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_sid"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_secret"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_last_login"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -99,6 +114,20 @@
 
                 <TextView
                     android:id="@+id/debug_sid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_default"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debug_secret"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_default"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debug_last_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_default"
@@ -235,15 +264,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/debug_is_debug"
                     android:textSize="16sp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_package"
                     android:textSize="16sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_version"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_auth_status"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -271,6 +308,13 @@
 
                 <TextView
                     android:id="@+id/debug_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debug_default"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debug_auth_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/debug_default"

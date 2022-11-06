@@ -6,7 +6,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Header
 import retrofit2.http.POST
 import ua.ilyadreamix.m3amino.http.model.LoginByEmailRequestModel
-import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
+import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModel
 
 interface AuthService {
     @Headers("Content-Type: application/json")
@@ -18,5 +18,5 @@ interface AuthService {
         @Header("NDCLANG") ndcLang: String,
         @Header("NDCDEVICEID") ndcDeviceId: String,
         @Header("NDC-MSG-SIG") ndcMsgSig: String
-    ): Response<LoginEmailResponseModelModel>
+    ): Response<LoginEmailResponseModel>
 }
