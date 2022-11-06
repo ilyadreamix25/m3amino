@@ -48,4 +48,7 @@
     </string>
     <string name="debug_auth_status">Статус входа</string>
     <string name="verify">Подтвердить</string>
+    <string name="home_profile">Профиль</string>
+    <string name="home_coms">Сообщества</string>
+    <string name="home_chats">Чаты</string>
 </resources>

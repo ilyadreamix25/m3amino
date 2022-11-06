@@ -5,6 +5,8 @@ buildscript {
         set("materialVersion", "1.7.0")
         set("constraintLayoutVersion", "2.1.4")
         set("recyclerViewVersion", "1.2.1")
+        set("fragmentVersion", "1.5.4")
+        set("navVersion", "2.5.3")
 
         // Coroutines
         set("coreKtxVersion", "1.9.0")

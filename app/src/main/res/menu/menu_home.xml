@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_me"
+        android:enabled="true"
+        android:icon="@drawable/ic_person"
+        android:title="@string/home_profile"/>
+
+    <item
+        android:id="@+id/home_coms"
+        android:enabled="true"
+        android:icon="@drawable/ic_blocks"
+        android:title="@string/home_coms"/>
+
+    <item
+        android:id="@+id/home_chats"
+        android:enabled="true"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/home_chats"/>
+
+</menu>

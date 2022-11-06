@@ -12,8 +12,8 @@ android {
         minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 5
-        versionName = "1.045"
+        versionCode = 6
+        versionName = "1.05-PRE"
     }
 
     buildTypes {
@@ -47,6 +47,8 @@ val appCompatVersion: String by rootProject.extra
 val materialVersion: String by rootProject.extra
 val constraintLayoutVersion: String by rootProject.extra
 val recyclerViewVersion: String by rootProject.extra
+val fragmentVersion: String by rootProject.extra
+val navVersion: String by rootProject.extra
 
 // Coroutines
 val coreKtxVersion: String by rootProject.extra
@@ -68,6 +70,10 @@ dependencies {
     implementation("androidx.core:core-ktx:${coreKtxVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
     implementation("androidx.recyclerview:recyclerview:${recyclerViewVersion}")
+    implementation("androidx.fragment:fragment:${fragmentVersion}")
+    implementation("androidx.fragment:fragment-ktx:${fragmentVersion}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${navVersion}")
+    implementation("androidx.navigation:navigation-ui-ktx:${navVersion}")
 
     // Live data and view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")

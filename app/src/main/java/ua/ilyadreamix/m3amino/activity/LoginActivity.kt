@@ -124,9 +124,8 @@ class LoginActivity: M3AminoActivity() {
                         it.error.message,
                         buttonText = getString(R.string.verify),
                         onClick = {
-                            val browserIntent =
-                                Intent(Intent.ACTION_VIEW, Uri.parse(it.error.url!!))
-                                startActivity(browserIntent)
+                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it.error.url!!))
+                            startActivity(browserIntent)
                         }
                     )
                 }
