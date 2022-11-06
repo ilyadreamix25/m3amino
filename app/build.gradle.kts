@@ -12,8 +12,8 @@ android {
         minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 2
-        versionName = "1.05"
+        versionCode = 3
+        versionName = "1.06"
     }
 
     buildTypes {

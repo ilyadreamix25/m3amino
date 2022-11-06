@@ -2,18 +2,13 @@ package ua.ilyadreamix.m3amino.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.component.LoadingButton
+import ua.ilyadreamix.m3amino.databinding.ActivityLoginBinding
 import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModelModel
 import ua.ilyadreamix.m3amino.http.request.AuthRequest
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
@@ -25,21 +20,26 @@ class LoginActivity: M3AminoActivity() {
 
     private var enabled = true
     private var debugMenuCounter = 0
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val versionTextView = findViewById<TextView>(R.id.login_version)
-        versionTextView.text = getString(R.string.version, BuildConfig.VERSION_NAME)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
 
-        val loginButton = findViewById<MaterialCardView>(R.id.login_button)
-        loginButton.setOnClickListener {
+        setContentView(view)
+        initialize()
+    }
+
+    private fun initialize() {
+        binding.loginVersion.text = getString(R.string.version, BuildConfig.VERSION_NAME)
+
+        binding.loginButton.root.setOnClickListener {
             showWarning()
         }
 
-        val bottomLayout = findViewById<LinearLayout>(R.id.login_bottom_layout)
-        bottomLayout.setOnClickListener {
+        binding.loginBottomLayout.setOnClickListener {
             if (debugMenuCounter < 5) debugMenuCounter++
             else {
                 debugMenuCounter = 0
@@ -51,8 +51,8 @@ class LoginActivity: M3AminoActivity() {
     }
 
     private fun login() {
-        val emailET = findViewById<TextInputEditText>(R.id.login_email_text_field)
-        val passwordET = findViewById<TextInputEditText>(R.id.login_password_text_field)
+        val emailET = binding.loginEmailTextField
+        val passwordET = binding.loginPasswordTextField
         val deviceId = AminoRequestUtility.generateDeviceId()
 
         val loginEmailLivedata: LiveData<BaseResponse<LoginEmailResponseModelModel>> = liveData {
@@ -86,19 +86,16 @@ class LoginActivity: M3AminoActivity() {
     }
 
     private fun setEnabled() {
-        findViewById<TextInputLayout>(R.id.login_email_text_layout).isEnabled = !enabled
-        findViewById<TextInputLayout>(R.id.login_password_text_layout).isEnabled = !enabled
-        findViewById<MaterialCardView>(R.id.login_button).isEnabled = !enabled
+        binding.loginEmailTextLayout.isEnabled = !enabled
+        binding.loginPasswordTextLayout.isEnabled = !enabled
+        binding.loginButton.root.isEnabled = !enabled
 
         enabled = !enabled
     }
 
     private fun setLoadingButton() {
-        val button = findViewById<MaterialCardView>(R.id.login_button)
-        val buttonCPI = button.findViewById<CircularProgressIndicator>(R.id.loading_button_cpi)
-
         val loadingButton = LoadingButton(
-            buttonCPI,
+            binding.loginButton.loadingButtonCpi,
             resources.getInteger(android.R.integer.config_shortAnimTime)
         )
 
