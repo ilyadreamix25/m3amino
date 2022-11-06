@@ -57,7 +57,7 @@ class DebugActivity : M3AminoActivity() {
     }
 
     private fun setProps(view: TextView, text: String) {
-        view.text = getString(R.string.three_dots, text.substring(0, 22))
+        view.text = text
         view.setOnLongClickListener {
             copyText(text)
             true

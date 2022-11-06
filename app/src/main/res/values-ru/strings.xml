@@ -47,4 +47,5 @@
         информацию из него. Это меню содержит информацию о вашем аккаунте
     </string>
     <string name="debug_auth_status">Статус входа</string>
+    <string name="verify">Подтвердить</string>
 </resources>

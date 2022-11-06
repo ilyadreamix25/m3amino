@@ -9,6 +9,7 @@
     <string name="unexpected_error">Unexpected error. Contact the developer</string>
     <string name="check_internet">Error! Check your internet connection</string>
     <string name="three_dots" translatable="false">%1$s...</string>
+    <string name="verify">Verify</string>
 
     <!-- Login -->
     <string name="amino_logo">Amino logo</string>

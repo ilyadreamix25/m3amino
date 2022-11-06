@@ -1,6 +1,7 @@
 package ua.ilyadreamix.m3amino.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -112,10 +113,23 @@ class LoginActivity: M3AminoActivity() {
 
         loginEmailLivedata.observe(this) {
             if (it.state == ResponseState.BAD)
-                alerts.alertOnePositive(
-                    getString(R.string.ad_login_error),
-                    it.error!!.message
-                )
+                if (it.error!!.statusCode != 270)
+                    alerts.alertOnePositive(
+                        getString(R.string.ad_login_error),
+                        it.error.message
+                    )
+                else {
+                    alerts.alertOnePositive(
+                        getString(R.string.ad_login_error),
+                        it.error.message,
+                        buttonText = getString(R.string.verify),
+                        onClick = {
+                            val browserIntent =
+                                Intent(Intent.ACTION_VIEW, Uri.parse(it.error.url!!))
+                                startActivity(browserIntent)
+                        }
+                    )
+                }
             else {
                 val sessionUtility = AminoSessionUtility(this)
                 sessionUtility.saveLoginData(

@@ -2,11 +2,14 @@ package ua.ilyadreamix.m3amino.http.model
 
 import com.google.gson.annotations.SerializedName
 
+// 270 - verify account
 open class BasicResponseModel(
     @SerializedName("api:statuscode")
     val statusCode: Int = -1,
     @SerializedName("api:message")
-    val message: String = "Unable to make an request"
+    val message: String = "Unable to make an request",
+    @SerializedName("url")
+    val url: String? = null
 )
 
 data class LoginEmailResponseModel(
