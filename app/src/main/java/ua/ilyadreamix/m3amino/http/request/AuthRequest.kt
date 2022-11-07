@@ -11,29 +11,30 @@ class AuthRequest(
     deviceId: String = AminoRequestUtility.generateDeviceId(),
     userAgent: String = System.getProperty("http.agent") as String,
     acceptLanguage: String = "en-US",
-    ndcLang: String = "EN"
-): BaseRequest(deviceId, userAgent, acceptLanguage, ndcLang) {
+    ndcLang: String = "EN",
+    ndcAuth: String? = null
+): BaseRequest(deviceId, userAgent, acceptLanguage, ndcLang, ndcAuth) {
 
     private val service = RetrofitInstance
         .getRetrofitInstance()
         .create(AuthService::class.java)
 
-    suspend fun loginByEmail(email: String, password: String): BaseResponse<LoginEmailResponseModel> {
+    /** secret = "0 {password}" */
+    suspend fun loginByEmail(email: String, secret: String): BaseResponse<LoginEmailResponseModel> {
         val data = LoginByEmailRequestModel(
             email,
-            password,
+            secret,
             deviceId = deviceId
         )
 
-        val response = service
-            .loginByEmail(
-                data,
-                userAgent,
-                acceptLanguage,
-                ndcLang,
-                deviceId,
-                AminoRequestUtility.generateSig(Gson().toJson(data))
-            )
+        val response = service.loginByEmail(
+            data,
+            userAgent,
+            acceptLanguage,
+            ndcLang,
+            deviceId,
+            AminoRequestUtility.generateSig(Gson().toJson(data))
+        )
 
         return getFromResponse(response)
     }

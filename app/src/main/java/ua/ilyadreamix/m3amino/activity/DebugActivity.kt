@@ -33,28 +33,14 @@ class DebugActivity : M3AminoActivity() {
         val sessionData = sessionUtility.getSessionData()
 
         setProps(binding.debugUa, (System.getProperty("http.agent") as String))
+        setProps(binding.debugSecret, sessionData.lastLogin.toString())
 
-        sessionData.userId?.let {
-            setProps(binding.debugUserId, it)
-        }
-        sessionData.deviceId?.let {
-            setProps(binding.debugDeviceId, it)
-        }
-        sessionData.sessionId?.let {
-            setProps(binding.debugSid, it)
-        }
-        sessionData.secret?.let {
-            setProps(binding.debugSecret, it)
-        }
-
-        val lastLogin = sessionData.lastLogin.toString()
-
-        binding.debugLastLogin.text = lastLogin
-        binding.debugLastLogin.setOnLongClickListener {
-            copyText(lastLogin)
-            true
-        }
+        sessionData.userId?.let { setProps(binding.debugUserId, it) }
+        sessionData.deviceId?.let { setProps(binding.debugDeviceId, it) }
+        sessionData.sessionId?.let { setProps(binding.debugSid, it) }
+        sessionData.secret?.let { setProps(binding.debugSecret, it) }
     }
+
 
     private fun setProps(view: TextView, text: String) {
         view.text = text

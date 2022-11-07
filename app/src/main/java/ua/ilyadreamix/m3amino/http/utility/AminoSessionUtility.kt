@@ -1,10 +1,10 @@
 package ua.ilyadreamix.m3amino.http.utility
 
+import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 
 class AminoSessionUtility(
-    private val activity: AppCompatActivity
+    private val activity: Activity
 ) {
     fun getSessionData(): AminoSession {
         val sp = activity.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
@@ -52,7 +52,7 @@ class AminoSessionUtility(
             .apply()
     }
 
-    fun setLoginTime(loginTime: Long) {
+    fun setLoginTime(loginTime: Long = System.currentTimeMillis()) {
         val sp = activity.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
 
         sp.edit()

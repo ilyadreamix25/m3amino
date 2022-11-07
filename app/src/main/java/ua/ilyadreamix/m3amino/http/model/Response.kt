@@ -2,8 +2,8 @@ package ua.ilyadreamix.m3amino.http.model
 
 import com.google.gson.annotations.SerializedName
 
-// 270 - verify account
 open class BasicResponseModel(
+    /** 270 - verify account */
     @SerializedName("api:statuscode")
     val statusCode: Int = -1,
     @SerializedName("api:message")
@@ -23,4 +23,8 @@ data class LoginEmailResponseModel(
     val userProfile: UserProfileModel,
     @SerializedName("sid")
     val sid: String
+): BasicResponseModel()
+
+data class CommunitiesResponseModel(
+    val communityList: List<Community>
 ): BasicResponseModel()

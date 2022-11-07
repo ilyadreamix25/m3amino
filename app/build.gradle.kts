@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -12,8 +13,8 @@ android {
         minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 6
-        versionName = "1.05-PRE"
+        versionCode = 7
+        versionName = "1.055"
     }
 
     buildTypes {

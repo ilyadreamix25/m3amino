@@ -8,14 +8,13 @@
     android:layout_height="match_parent">
 
     <!-- Main content -->
-    <androidx.fragment.app.FragmentContainerView
+    <FrameLayout
         android:id="@+id/home_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:name="ua.ilyadreamix.m3amino.fragment.ComsFragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_coms" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Navigation bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

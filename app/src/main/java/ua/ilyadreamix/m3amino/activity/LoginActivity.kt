@@ -83,7 +83,7 @@ class LoginActivity: M3AminoActivity() {
         val passwordET = binding.loginPasswordTextField
         val deviceId = AminoRequestUtility.generateDeviceId()
 
-        val loginEmailLivedata: LiveData<BaseResponse<LoginEmailResponseModel>> = liveData {
+        val loginEmailLiveData: LiveData<BaseResponse<LoginEmailResponseModel>> = liveData {
             val requester = AuthRequest(
                 deviceId = deviceId,
                 acceptLanguage = getString(R.string.language),
@@ -111,7 +111,7 @@ class LoginActivity: M3AminoActivity() {
             }
         }
 
-        loginEmailLivedata.observe(this) {
+        loginEmailLiveData.observe(this) {
             if (it.state == ResponseState.BAD)
                 if (it.error!!.statusCode != 270)
                     alerts.alertOnePositive(

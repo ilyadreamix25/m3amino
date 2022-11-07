@@ -19,9 +19,7 @@ class Alerts(private val activity: AppCompatActivity) {
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(buttonText) { _, _ ->
-                onClick()
-            }
+            .setPositiveButton(buttonText) { _, _ -> onClick() }
             .setCancelable(false)
             .show()
     }
@@ -37,12 +35,8 @@ class Alerts(private val activity: AppCompatActivity) {
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
-            .setNegativeButton(nButtonText) { _, _ ->
-                nOnClick()
-            }
-            .setPositiveButton(pButtonText) { _, _ ->
-                pOnClick()
-            }
+            .setNegativeButton(nButtonText) { _, _ -> nOnClick() }
+            .setPositiveButton(pButtonText) { _, _ -> pOnClick() }
             .setCancelable(false)
             .show()
     }
