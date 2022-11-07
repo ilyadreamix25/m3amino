@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.bumptech.glide.Glide
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.component.Alerts
@@ -137,6 +138,10 @@ class LoginActivity: M3AminoActivity() {
                     deviceId,
                     it.data.userProfile.uid!!
                 )
+
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
             setEnabled()

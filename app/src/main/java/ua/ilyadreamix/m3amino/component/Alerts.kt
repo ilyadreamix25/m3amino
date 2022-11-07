@@ -1,13 +1,24 @@
 package ua.ilyadreamix.m3amino.component
 
+import android.app.Activity
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ua.ilyadreamix.m3amino.R
 
-class Alerts(private val activity: AppCompatActivity) {
+class Alerts(private val activity: Activity) {
     fun alertToast(text: String) {
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
+    }
+
+    fun alertNoButtons(
+        title: String,
+        message: String
+    ) {
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+            .show()
     }
 
     fun alertOnePositive(

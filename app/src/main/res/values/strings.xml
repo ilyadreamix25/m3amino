@@ -59,11 +59,14 @@
     <string name="ad_ok" translatable="false">OK</string>
     <string name="ad_cancel">Cancel</string>
     <string name="ad_login_error">Login error</string>
+    <string name="ad_request_error">Request error</string>
 
     <!-- Home activity -->
     <string name="home_profile">Profile</string>
     <string name="home_coms">Communities</string>
     <string name="home_chats">Chats</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Community fragment -->
+    <string name="com_community_icon">Community icon</string>
+    <string name="com_my_coms">My communities</string>
 </resources>

@@ -15,6 +15,7 @@ import java.util.*
 object AminoRequestUtility {
     private const val DEVICE_KEY = "02B258C63559D8804321C5D5065AF320358D366F"
     private const val SIG_KEY = "F8E7A61AC3F725941E3AC7CAE2D688BE97F30B93"
+    private const val AMINO_VERSION = "3.5.34745"
 
     private fun hmacSha1Hex(
         value: ByteArray,
@@ -69,5 +70,12 @@ object AminoRequestUtility {
         )
 
         return String(b64Bytes)
+    }
+
+    fun generateUserAgent(): String {
+        var systemAgent = System.getProperty("http.agent") as String
+        systemAgent = systemAgent.substring(0, systemAgent.length - 1)
+
+        return "$systemAgent; com.narvii.amino.master/$AMINO_VERSION)"
     }
 }

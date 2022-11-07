@@ -7,7 +7,7 @@ import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 
 class CommunityRequest(
     deviceId: String = AminoRequestUtility.generateDeviceId(),
-    userAgent: String = System.getProperty("http.agent") as String,
+    userAgent: String = AminoRequestUtility.generateUserAgent(),
     acceptLanguage: String = "en-US",
     ndcLang: String = "EN",
     ndcAuth: String? = null

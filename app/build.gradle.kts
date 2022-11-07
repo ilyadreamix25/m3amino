@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
     id("kotlin-parcelize")
+    kotlin("kapt")
 }
 
 android {
@@ -13,8 +13,8 @@ android {
         minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 7
-        versionName = "1.055"
+        versionCode = 8
+        versionName = "1.06"
     }
 
     buildTypes {
@@ -50,6 +50,7 @@ val constraintLayoutVersion: String by rootProject.extra
 val recyclerViewVersion: String by rootProject.extra
 val fragmentVersion: String by rootProject.extra
 val navVersion: String by rootProject.extra
+val glideVersion: String by rootProject.extra
 
 // Coroutines
 val coreKtxVersion: String by rootProject.extra
@@ -89,6 +90,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:${retrofitVersion}")
     implementation("com.squareup.retrofit2:converter-gson:${retrofitVersion}")
     implementation("com.squareup.okhttp3:logging-interceptor:${okHttp3LogVersion}")
+
+    // Images
+    implementation("com.github.bumptech.glide:glide:${glideVersion}")
 
     // Hash utilities
     implementation("commons-codec:commons-codec:${commonsCodecVersion}")

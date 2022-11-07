@@ -4,19 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ComsFragment">
+    tools:context=".fragment.ComsFragment"
+    android:layout_marginBottom="90dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Top bar -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/coms_top_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true"
+            app:layout_scrollFlags="scroll|snap">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/coms_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/com_my_coms"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Communities list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coms_rv"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>

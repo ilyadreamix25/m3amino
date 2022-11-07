@@ -8,6 +8,7 @@ import android.widget.TextView
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ActivityDebugBinding
+import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
 
 
@@ -32,7 +33,7 @@ class DebugActivity : M3AminoActivity() {
         val sessionUtility = AminoSessionUtility(this)
         val sessionData = sessionUtility.getSessionData()
 
-        setProps(binding.debugUa, (System.getProperty("http.agent") as String))
+        setProps(binding.debugUa, AminoRequestUtility.generateUserAgent())
         setProps(binding.debugSecret, sessionData.lastLogin.toString())
 
         sessionData.userId?.let { setProps(binding.debugUserId, it) }

@@ -51,4 +51,7 @@
     <string name="home_profile">Профиль</string>
     <string name="home_coms">Сообщества</string>
     <string name="home_chats">Чаты</string>
+    <string name="ad_request_error">Ошибка при запросе</string>
+    <string name="com_community_icon">Иконка сообщества</string>
+    <string name="com_my_coms">Мои сообщества</string>
 </resources>

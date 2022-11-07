@@ -3,8 +3,11 @@ package ua.ilyadreamix.m3amino.rv
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ItemCommunityBinding
 import ua.ilyadreamix.m3amino.http.model.Community
+
 
 class CommunityItemAdapter(
     private val communities: List<Community>
@@ -17,6 +20,14 @@ class CommunityItemAdapter(
     ): RecyclerView.ViewHolder(communityItemView.root) {
         fun bind(item: Community) {
             communityItemView.communityName.text = item.name
+
+            Glide.with(communityItemView.root.context)
+                .asBitmap()
+                .dontTransform()
+                .error(R.drawable.ic_cross)
+                .placeholder(R.drawable.ic_check)
+                .load(item.icon!!.replace("http://", "https://"))
+                .into(communityItemView.communityIcon)
         }
     }
 

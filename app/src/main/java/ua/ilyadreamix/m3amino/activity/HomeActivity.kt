@@ -1,5 +1,8 @@
 package ua.ilyadreamix.m3amino.activity
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.*
@@ -27,44 +30,69 @@ class HomeActivity : AppCompatActivity() {
 
         activeFragment = comsFragment
 
-        setInsets()
+        setDecor()
         addFragments()
         setNavClickListeners()
         setContentView(view)
     }
 
-    private fun setInsets() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.homeContent) { contentView, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-            contentView.updatePadding(top = insets.top)
-            WindowInsetsCompat.CONSUMED
+    private fun setDecor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setNavClickListeners() {
         binding.homeNavBar.menu.getItem(1).isChecked = true
-        binding.homeNavBar.setOnItemReselectedListener {  }
 
+        binding.homeNavBar.setOnItemReselectedListener {  }
         binding.homeNavBar.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home_me -> { replaceFragment(profileFragment); true }
-                R.id.home_coms -> { replaceFragment(comsFragment); true }
-                R.id.home_chats -> { replaceFragment(chatsFragment); true }
-                else -> false
+                R.id.home_me -> {
+                    replaceFragment(profileFragment)
+                    setIcons(profileIcon = getDrawable(R.drawable.ic_person_filled)!!)
+                }
+                R.id.home_coms -> {
+                    replaceFragment(comsFragment)
+                    setIcons(comsIcon = getDrawable(R.drawable.ic_blocks_filled)!!)
+                }
+                R.id.home_chats -> {
+                    replaceFragment(chatsFragment)
+                    setIcons(chatsIcon = getDrawable(R.drawable.ic_chat_filled)!!)
+                }
             }
+
+            true
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun setIcons(
+        profileIcon: Drawable = getDrawable(R.drawable.ic_person_outlined)!!,
+        comsIcon: Drawable = getDrawable(R.drawable.ic_blocks_outlined)!!,
+        chatsIcon: Drawable = getDrawable(R.drawable.ic_chat_outlined)!!
+    ) {
+        binding.homeNavBar.menu.getItem(0).icon = profileIcon
+        binding.homeNavBar.menu.getItem(1).icon = comsIcon
+        binding.homeNavBar.menu.getItem(2).icon = chatsIcon
+    }
+
+    /**
+     * Add fragments and hide unselected
+     */
     private fun addFragments() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.home_content, profileFragment).hide(profileFragment)
-            add(R.id.home_content, comsFragment)
             add(R.id.home_content, chatsFragment).hide(chatsFragment)
+            add(R.id.home_content, comsFragment)
             commit()
         }
     }
 
+    /**
+     * Hide activeFragment and show fragment
+     */
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .hide(activeFragment)
