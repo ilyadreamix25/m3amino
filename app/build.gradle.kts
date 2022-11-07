@@ -13,13 +13,13 @@ android {
         minSdk = 22
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
-        versionCode = 8
-        versionName = "1.06"
+        versionCode = 9
+        versionName = "1.065"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -51,6 +51,7 @@ val recyclerViewVersion: String by rootProject.extra
 val fragmentVersion: String by rootProject.extra
 val navVersion: String by rootProject.extra
 val glideVersion: String by rootProject.extra
+val shimmerVersion: String by rootProject.extra
 
 // Coroutines
 val coreKtxVersion: String by rootProject.extra
@@ -76,6 +77,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:${fragmentVersion}")
     implementation("androidx.navigation:navigation-fragment-ktx:${navVersion}")
     implementation("androidx.navigation:navigation-ui-ktx:${navVersion}")
+    implementation("com.facebook.shimmer:shimmer:${shimmerVersion}")
 
     // Live data and view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")

@@ -8,6 +8,7 @@ buildscript {
         set("fragmentVersion", "1.5.4")
         set("navVersion", "2.5.3")
         set("glideVersion", "4.14.2")
+        set("shimmerVersion", "0.5.0")
 
         // Coroutines
         set("coreKtxVersion", "1.9.0")

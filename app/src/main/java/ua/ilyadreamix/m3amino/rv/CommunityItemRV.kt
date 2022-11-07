@@ -8,7 +8,6 @@ import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ItemCommunityBinding
 import ua.ilyadreamix.m3amino.http.model.Community
 
-
 class CommunityItemAdapter(
     private val communities: List<Community>
 ): RecyclerView.Adapter<CommunityItemAdapter.CommunityItemViewHolder>() {

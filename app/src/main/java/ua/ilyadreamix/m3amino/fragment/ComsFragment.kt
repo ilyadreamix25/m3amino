@@ -1,5 +1,7 @@
 package ua.ilyadreamix.m3amino.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -81,6 +83,25 @@ class ComsFragment : Fragment() {
                 })
                 binding.comsRv.layoutManager = GridLayoutManager(requireContext(), 3)
                 binding.comsRv.adapter = adapter
+
+                binding.comsCpi.animate()
+                    .alpha(0f)
+                    .setDuration(300)
+                    .setListener(object: AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.comsCpi.visibility = View.GONE
+
+                            binding.comsContent.apply {
+                                alpha = 0f
+                                visibility = View.VISIBLE
+
+                                animate()
+                                    .alpha(1f)
+                                    .setDuration(300)
+                                    .setListener(null)
+                            }
+                        }
+                    })
             }
         }
 
