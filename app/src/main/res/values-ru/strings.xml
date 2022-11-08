@@ -54,4 +54,7 @@
     <string name="ad_request_error">Ошибка при запросе</string>
     <string name="com_community_icon">Иконка сообщества</string>
     <string name="com_my_coms">Мои сообщества</string>
+    <string name="debug_set_auth_status_1">Статус входа 1</string>
+    <string name="debug_goto_splash">Перейти к Splash</string>
+    <string name="login_error">Ошибка при авто-входе</string>
 </resources>

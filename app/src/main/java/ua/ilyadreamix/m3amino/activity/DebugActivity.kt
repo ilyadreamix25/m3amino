@@ -2,6 +2,7 @@ package ua.ilyadreamix.m3amino.activity
 
 import android.content.ClipData
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
@@ -27,14 +28,25 @@ class DebugActivity : M3AminoActivity() {
         setDeviceInfo()
         setAppInfo()
         setAminoInfo()
+        setButtons()
+    }
+
+    private fun setButtons() {
+        binding.debugSetAuthStatus1.setOnClickListener {
+            AminoSessionUtility.setLoginTime(1L)
+        }
+        binding.debugGotoSplash.setOnClickListener {
+            val intent = Intent(this, SplashActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setAminoInfo() {
-        val sessionUtility = AminoSessionUtility(this)
-        val sessionData = sessionUtility.getSessionData()
+        val sessionData = AminoSessionUtility.getSessionData()
 
         setProps(binding.debugUa, AminoRequestUtility.generateUserAgent())
-        setProps(binding.debugSecret, sessionData.lastLogin.toString())
+        setProps(binding.debugLastLogin, sessionData.lastLogin.toString())
 
         sessionData.userId?.let { setProps(binding.debugUserId, it) }
         sessionData.deviceId?.let { setProps(binding.debugDeviceId, it) }
@@ -73,6 +85,6 @@ class DebugActivity : M3AminoActivity() {
             BuildConfig.VERSION_NAME,
             BuildConfig.VERSION_CODE
         )
-        binding.debugAuthStatus.text = AminoSessionUtility(this).getLoginStatus().toString()
+        binding.debugAuthStatus.text = AminoSessionUtility.getLoginStatus().toString()
     }
 }

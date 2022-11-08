@@ -24,7 +24,6 @@ import ua.ilyadreamix.m3amino.http.model.Community
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.CommunityRequest
 import ua.ilyadreamix.m3amino.http.request.ResponseState
-import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
 import ua.ilyadreamix.m3amino.rv.CommunityItemAdapter
 
 class ComsFragment : Fragment() {
@@ -44,14 +43,9 @@ class ComsFragment : Fragment() {
 
         val accountCommunitiesLiveData: LiveData<BaseResponse<CommunitiesResponseModel>> =
             liveData {
-                val aminoSessionUtility = AminoSessionUtility(requireActivity())
-                val aminoSession = aminoSessionUtility.getSessionData()
-
                 val requester = CommunityRequest(
-                    deviceId = aminoSession.deviceId!!,
                     acceptLanguage = getString(R.string.language),
-                    ndcLang = getString(R.string.ndc_language),
-                    ndcAuth = aminoSession.sessionId!!
+                    ndcLang = getString(R.string.ndc_language)
                 )
                 val response = requester.getAccountCommunities()
 

@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     android:paddingEnd="24dp"
     android:paddingStart="24dp"
-    android:paddingTop="24dp">
+    android:paddingTop="24dp"
+    android:layout_marginBottom="24dp">
 
     <!-- Start layout -->
     <LinearLayout
@@ -335,6 +336,35 @@
             </LinearLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/debug_set_auth_status_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            app:cornerRadius="12dp"
+            android:text="@string/debug_set_auth_status_1"/>
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="0dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/debug_goto_splash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            app:cornerRadius="12dp"
+            android:text="@string/debug_goto_splash"/>
 
     </LinearLayout>
 

@@ -3,29 +3,22 @@ package ua.ilyadreamix.m3amino.http.request
 import ua.ilyadreamix.m3amino.http.RetrofitInstance
 import ua.ilyadreamix.m3amino.http.model.CommunitiesResponseModel
 import ua.ilyadreamix.m3amino.http.service.CommunityService
-import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
 
 class CommunityRequest(
-    deviceId: String = AminoRequestUtility.generateDeviceId(),
-    userAgent: String = AminoRequestUtility.generateUserAgent(),
     acceptLanguage: String = "en-US",
-    ndcLang: String = "EN",
-    ndcAuth: String? = null
-): BaseRequest(deviceId, userAgent, acceptLanguage, ndcLang, ndcAuth) {
+    ndcLang: String = "EN"
+): BaseRequest() {
 
     private val service = RetrofitInstance
-        .getRetrofitInstance()
+        .getRetrofitInstance(acceptLanguage, ndcLang)
         .create(CommunityService::class.java)
 
-    suspend fun getAccountCommunities(start: Int = 0, size: Int = 25): BaseResponse<CommunitiesResponseModel> {
+    suspend fun getAccountCommunities(
+        start: Int = 0, size: Int = 25
+    ): BaseResponse<CommunitiesResponseModel> {
         val response = service.getAccountCommunities(
             start = start,
-            size = size,
-            ndcAuth = "sid=" + ndcAuth!!,
-            ndcLang = ndcLang,
-            ndcDeviceId = deviceId,
-            acceptLanguage = acceptLanguage,
-            userAgent = userAgent
+            size = size
         )
 
         return getFromResponse(response)

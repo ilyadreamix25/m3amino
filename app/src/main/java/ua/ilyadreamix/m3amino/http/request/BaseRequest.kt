@@ -12,13 +12,7 @@ class BaseResponse<T>(
     val data: T?
 )
 
-open class BaseRequest(
-    open val deviceId: String,
-    open val userAgent: String,
-    open val acceptLanguage: String,
-    open val ndcLang: String,
-    open val ndcAuth: String? = null
-) {
+open class BaseRequest {
     protected fun <T> getFromResponse(response: Response<T>): BaseResponse<T> {
         return if (!response.isSuccessful) {
             val body = response.errorBody()!!.charStream()

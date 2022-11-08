@@ -10,17 +10,24 @@
     android:paddingStart="24dp"
     android:paddingTop="24dp">
 
-    <ImageView
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/splash_shimmer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX=".75"
-        android:scaleY=".75"
-        android:src="@drawable/amino_logo"
-        app:tint="?colorOnBackground"
-        android:contentDescription="@string/amino_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:src="@drawable/amino_logo"
+            app:tint="?colorOnBackground"
+            android:contentDescription="@string/amino_logo" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

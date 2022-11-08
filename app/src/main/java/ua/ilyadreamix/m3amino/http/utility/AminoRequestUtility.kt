@@ -54,8 +54,7 @@ object AminoRequestUtility {
                 mac).uppercase(Locale.getDefault())
     }
 
-    fun generateSig(data: String): String {
-        val byteData = data.toByteArray()
+    fun generateSig(byteData: ByteArray): String {
         val key = Hex.decodeHex(SIG_KEY.toCharArray())
 
         val mac = hmacSha1Digest(

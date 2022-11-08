@@ -10,6 +10,7 @@
     <string name="check_internet">Error! Check your internet connection</string>
     <string name="three_dots" translatable="false">%1$s...</string>
     <string name="verify">Verify</string>
+    <string name="login_error">Auto-login error</string>
 
     <!-- Login -->
     <string name="amino_logo">Amino logo</string>
@@ -44,6 +45,8 @@
     <string name="debug_package">Package</string>
     <string name="debug_version">Version</string>
     <string name="debug_auth_status">Auth status</string>
+    <string name="debug_set_auth_status_1">Set auth status 1</string>
+    <string name="debug_goto_splash">Go to splash</string>
 
     <!-- Alert dialog -->
     <string name="ad_warning_title">Warning</string>

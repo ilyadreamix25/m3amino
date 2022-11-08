@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.bumptech.glide.Glide
 import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.component.Alerts
@@ -86,7 +85,6 @@ class LoginActivity: M3AminoActivity() {
 
         val loginEmailLiveData: LiveData<BaseResponse<LoginEmailResponseModel>> = liveData {
             val requester = AuthRequest(
-                deviceId = deviceId,
                 acceptLanguage = getString(R.string.language),
                 ndcLang = getString(R.string.ndc_language)
             )
@@ -113,7 +111,7 @@ class LoginActivity: M3AminoActivity() {
         }
 
         loginEmailLiveData.observe(this) {
-            if (it.state == ResponseState.BAD)
+            if (it.state == ResponseState.BAD) {
                 if (it.error!!.statusCode != 270)
                     alerts.alertOnePositive(
                         getString(R.string.ad_login_error),
@@ -130,13 +128,13 @@ class LoginActivity: M3AminoActivity() {
                         }
                     )
                 }
-            else {
-                val sessionUtility = AminoSessionUtility(this)
-                sessionUtility.saveLoginData(
+            } else {
+                AminoSessionUtility.saveLoginData(
                     it.data!!.secret,
                     it.data.sid,
                     deviceId,
-                    it.data.userProfile.uid!!
+                    it.data.userProfile.uid!!,
+                    emailET.text.toString()
                 )
 
                 val intent = Intent(this, HomeActivity::class.java)
