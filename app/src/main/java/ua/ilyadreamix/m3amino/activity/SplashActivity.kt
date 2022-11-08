@@ -44,6 +44,7 @@ class SplashActivity : M3AminoActivity() {
                         ndcLang = getString(R.string.ndc_language)
                     )
 
+
                     try {
                         val response = requester.loginByEmail(
                             data.email!!,
@@ -57,7 +58,7 @@ class SplashActivity : M3AminoActivity() {
 
                         Toast.makeText(
                             this@SplashActivity,
-                            getString(R.string.login_error),
+                            getString(R.string.unexpected_error),
                             Toast.LENGTH_SHORT
                         ).show()
 

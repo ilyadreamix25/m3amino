@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.R as AR
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.activity.LoginActivity
 import ua.ilyadreamix.m3amino.databinding.ItemCommunityBinding
@@ -23,16 +26,20 @@ class CommunityItemAdapter(
         fun bind(item: Community) {
             communityItemView.communityName.text = item.name
 
-            Glide.with(communityItemView.root.context)
-                .asBitmap()
+            val context = communityItemView.root.context
+            val root = communityItemView.root
+
+            val loadingIcon = AppCompatResources.getDrawable(context, R.drawable.ic_no_image)
+            loadingIcon!!.setTint(MaterialColors.getColor(root, AR.attr.colorOnSurfaceVariant))
+
+            Glide.with(root).asBitmap()
+                .load(item.icon!!.replace("http://", "https://"))
                 .dontTransform()
                 .error(R.drawable.ic_cross)
-                .placeholder(R.drawable.ic_check)
-                .load(item.icon!!.replace("http://", "https://"))
+                .placeholder(loadingIcon)
                 .into(communityItemView.communityIcon)
 
             communityItemView.root.setOnClickListener {
-                val context = communityItemView.root.context
                 val intent = Intent(context, LoginActivity::class.java)
                 context.startActivity(intent)
                 (context as Activity).finish()

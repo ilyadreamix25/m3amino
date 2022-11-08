@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ua.ilyadreamix.m3amino.http.interceptor.AminoRequestInterceptor
 import java.util.concurrent.TimeUnit
 
-// TODO: Singleton
 object RetrofitInstance {
     private const val BASE_URL = "https://service.narvii.com/api/v1/"
 

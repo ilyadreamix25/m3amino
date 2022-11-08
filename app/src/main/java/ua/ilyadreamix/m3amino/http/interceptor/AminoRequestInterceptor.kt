@@ -31,16 +31,10 @@ class AminoRequestInterceptor(
 
     private fun setSig(builder: Request.Builder, body: RequestBody?): Request.Builder {
         body?.let {
-            val bodyBytes = getBodyBytes(body)
-
-            builder
-                .addHeader(
-                    "NDC-MSG-SIG",
-                    AminoRequestUtility.generateSig(bodyBytes)
-                )
-                .post(body)
-
-            return builder
+            return builder.addHeader(
+                "NDC-MSG-SIG",
+                AminoRequestUtility.generateSig(getBodyBytes(body))
+            )
         }
 
         return builder
@@ -48,9 +42,7 @@ class AminoRequestInterceptor(
 
     @Suppress("unused")
     private fun logRequest(request: Request, bodyBytes: ByteArray) {
-        var requestString = ""
-
-        requestString += "------ REQUEST ------\n"
+        var requestString = "------ REQUEST ------\n"
         requestString += "${request.method} ${request.url}\n"
         requestString += getHeadersLog(request.headers)
         requestString = addBodyLogIfAvailable(requestString, request.body, bodyBytes)

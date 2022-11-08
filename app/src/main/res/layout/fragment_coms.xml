@@ -7,20 +7,11 @@
     tools:context=".fragment.ComsFragment"
     android:layout_marginBottom="90dp">
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/coms_cpi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:indicatorSize="64dp"
-        android:indeterminate="true"
-        android:layout_gravity="center"
-        app:trackThickness="5dp"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coms_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:layout_height="match_parent">
 
         <!-- Top bar -->
         <com.google.android.material.appbar.AppBarLayout
@@ -38,6 +29,18 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!-- Fake communities list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/coms_fake_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_community"
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
         <!-- Communities list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coms_rv"
@@ -45,7 +48,11 @@
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_community"
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:visibility="invisible"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
