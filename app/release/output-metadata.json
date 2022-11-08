@@ -4,15 +4,15 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "ua.ilyadreamix.m3amino",
+  "applicationId": "ua.ilyadreamix.m3amino.indev",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 10,
-      "versionName": "1.07",
+      "versionCode": 11,
+      "versionName": "1.072",
       "outputFile": "app-release.apk"
     }
   ],
