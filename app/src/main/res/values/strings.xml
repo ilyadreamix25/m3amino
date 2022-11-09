@@ -8,7 +8,6 @@
     <string name="no">No</string>
     <string name="unexpected_error">Unexpected error. Contact the developer</string>
     <string name="check_internet">Error! Check your internet connection</string>
-    <string name="three_dots" translatable="false">%1$s...</string>
     <string name="verify">Verify</string>
     <string name="error">Error</string>
 
@@ -73,4 +72,13 @@
     <string name="com_community_icon">Community icon</string>
     <string name="com_my_coms">My communities</string>
     <string name="com_getting_error">Cannot get communities at the moment</string>
+
+    <!-- Profile fragment -->
+    <string name="profile_my_profile">My profile</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="profile_coins">Amino Coins</string>
+    <string name="profile_nickname" translatable="false">Profile nickname</string>
+    <string name="profile_amino_id" translatable="false">Profile AminoID</string>
+    <string name="profile_coins_default" translatable="false">0</string>
+
 </resources>

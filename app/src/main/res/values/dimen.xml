@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="card_grid_two_items_spacing">16dp</dimen>
-    <dimen name="community_no_image_padding">24dp</dimen>
+    <dimen name="community_no_image_padding">12dp</dimen>
 </resources>

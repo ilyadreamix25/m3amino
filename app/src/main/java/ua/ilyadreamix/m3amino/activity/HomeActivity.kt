@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ActivityHomeBinding
 import ua.ilyadreamix.m3amino.fragment.ChatsFragment
-import ua.ilyadreamix.m3amino.fragment.ComsFragment
+import ua.ilyadreamix.m3amino.fragment.CommunitiesFragment
 import ua.ilyadreamix.m3amino.fragment.ProfileFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var activeFragment: Fragment
 
     private val profileFragment = ProfileFragment()
-    private val comsFragment = ComsFragment()
+    private val communitiesFragment = CommunitiesFragment()
     private val chatsFragment = ChatsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
 
-        activeFragment = comsFragment
+        activeFragment = communitiesFragment
 
         setDecor()
         addFragments()
@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setNavClickListeners() {
         binding.homeNavBar.menu.getItem(1).isChecked = true
 
-        binding.homeNavBar.setOnItemReselectedListener {  }
+        binding.homeNavBar.setOnItemReselectedListener { }
         binding.homeNavBar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_me -> {
@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
                     setIcons(profileIcon = getDrawable(R.drawable.ic_person_filled)!!)
                 }
                 R.id.home_coms -> {
-                    replaceFragment(comsFragment)
+                    replaceFragment(communitiesFragment)
                     setIcons(comsIcon = getDrawable(R.drawable.ic_blocks_filled)!!)
                 }
                 R.id.home_chats -> {
@@ -85,7 +85,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().apply {
             add(R.id.home_content, profileFragment).hide(profileFragment)
             add(R.id.home_content, chatsFragment).hide(chatsFragment)
-            add(R.id.home_content, comsFragment)
+            add(R.id.home_content, communitiesFragment)
             commit()
         }
     }
@@ -94,10 +94,7 @@ class HomeActivity : AppCompatActivity() {
      * Hide activeFragment and show fragment
      */
     private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .hide(activeFragment)
-            .show(fragment)
-            .commit()
+        supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
 }

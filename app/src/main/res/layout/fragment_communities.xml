@@ -4,24 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ComsFragment"
+    tools:context=".fragment.CommunitiesFragment"
     android:layout_marginBottom="90dp">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coms_content"
+        android:id="@+id/communities_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- Top bar -->
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/coms_top_bar_layout"
+            android:id="@+id/communities_top_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             app:layout_scrollFlags="scroll|snap">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/coms_top_bar"
+                android:id="@+id/communities_top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/com_my_coms"/>
@@ -30,7 +30,7 @@
 
         <!-- Fake communities list -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/coms_fake_rv"
+            android:id="@+id/communities_fake_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
@@ -42,7 +42,7 @@
 
         <!-- Communities list -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/coms_rv"
+            android:id="@+id/communities_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
@@ -55,7 +55,7 @@
 
         <!-- Error -->
         <LinearLayout
-            android:id="@+id/coms_loading_error"
+            android:id="@+id/communities_loading_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -67,7 +67,7 @@
             <ImageView
                 android:layout_width="86dp"
                 android:layout_height="86dp"
-                android:src="@drawable/ic_bad_image"
+                android:src="@drawable/ic_warning"
                 app:tint="?colorOnBackground"
                 android:contentDescription="@string/error"
                 android:paddingBottom="12dp" />

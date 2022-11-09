@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Fade
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.component.Alerts
-import ua.ilyadreamix.m3amino.databinding.FragmentComsBinding
+import ua.ilyadreamix.m3amino.databinding.FragmentCommunitiesBinding
 import ua.ilyadreamix.m3amino.http.model.CommunitiesResponseModel
 import ua.ilyadreamix.m3amino.http.model.Community
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
@@ -29,9 +29,9 @@ import ua.ilyadreamix.m3amino.recycler.CommunityFakeItemAdapter
 import ua.ilyadreamix.m3amino.recycler.CommunityItemAdapter
 import kotlin.random.Random
 
-class ComsFragment : Fragment() {
+class CommunitiesFragment : Fragment() {
 
-    private lateinit var binding: FragmentComsBinding
+    private lateinit var binding: FragmentCommunitiesBinding
     private lateinit var adapter: CommunityItemAdapter
     private lateinit var communities: List<Community>
     private lateinit var alerts: Alerts
@@ -41,7 +41,7 @@ class ComsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentComsBinding.inflate(inflater)
+        binding = FragmentCommunitiesBinding.inflate(inflater)
         alerts = Alerts(requireActivity())
 
         setInsets()
@@ -66,7 +66,7 @@ class ComsFragment : Fragment() {
 
                 if (communitiesSize == 0)
                     AminoSPUtility.saveLastLoginCache(
-                        AminoSPUtility.AminoLastLoginCache(communitiesSize)
+                        AminoSPUtility.AminoLastLoginCache(it.data.communityList.size)
                     )
             }
         }
@@ -98,7 +98,9 @@ class ComsFragment : Fragment() {
     private fun getRandomFakeData() = listOf(1..Random.nextInt(15)).flatten()
 
     private fun setInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(binding.comsTopBarLayout) { topBar, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(
+            binding.communitiesTopBarLayout
+        ) { topBar, insets ->
             val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures())
             topBar.updatePadding(top = systemInsets.top)
             WindowInsetsCompat.CONSUMED
@@ -106,14 +108,14 @@ class ComsFragment : Fragment() {
     }
 
     private fun insertFakeData(size: List<Int> = getRandomFakeData()) {
-        binding.comsFakeRv.addItemPadding()
-        binding.comsFakeRv.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.comsFakeRv.adapter = CommunityFakeItemAdapter(size)
+        binding.communitiesFakeRv.addItemPadding()
+        binding.communitiesFakeRv.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.communitiesFakeRv.adapter = CommunityFakeItemAdapter(size)
     }
 
     private fun hideEverythingAndShowError() {
         hideFakeRv {
-            binding.comsLoadingError.apply {
+            binding.communitiesLoadingError.apply {
                 alpha = 0f
                 visibility = View.VISIBLE
 
@@ -126,24 +128,24 @@ class ComsFragment : Fragment() {
     }
 
     private fun hideFakeRv(onEnd: () -> Unit = {}) {
-        binding.comsFakeRv.animate()
+        binding.communitiesFakeRv.animate()
             .alpha(0f)
             .setDuration(150)
             .setListener(object: AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    binding.comsFakeRv.visibility = View.GONE
+                    binding.communitiesFakeRv.visibility = View.GONE
                     onEnd()
                 }
             })
     }
 
     private fun insertCommunities() {
-        binding.comsRv.addItemPadding()
-        binding.comsRv.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.comsRv.adapter = adapter
+        binding.communitiesRv.addItemPadding()
+        binding.communitiesRv.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.communitiesRv.adapter = adapter
 
         hideFakeRv {
-            binding.comsRv.apply {
+            binding.communitiesRv.apply {
                 alpha = 0f
                 visibility = View.VISIBLE
 

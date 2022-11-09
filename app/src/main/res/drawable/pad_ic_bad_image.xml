@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:left="24dp"
-        android:right="24dp"
-        android:top="24dp"
-        android:bottom="24dp">
+        android:left="@dimen/community_no_image_padding"
+        android:right="@dimen/community_no_image_padding"
+        android:top="@dimen/community_no_image_padding"
+        android:bottom="@dimen/community_no_image_padding">
         <selector>
             <item
                 android:drawable="@drawable/ic_bad_image"

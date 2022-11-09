@@ -14,9 +14,4 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
     </style>
-
-    <style name="LoadingDialog" parent="ThemeOverlay.Material3.Dialog.Alert">
-        <item name="windowMinWidthMajor">0dp</item>
-        <item name="windowMinWidthMinor">0dp</item>
-    </style>
 </resources>

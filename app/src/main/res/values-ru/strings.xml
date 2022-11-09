@@ -58,4 +58,7 @@
     <string name="debug_goto_splash">Перейти к Splash</string>
     <string name="error">Ошибка</string>
     <string name="com_getting_error">В данный момент мы не можем получить сообщества</string>
+    <string name="profile_my_profile">Мой профиль</string>
+    <string name="profile_icon">Аватарка</string>
+    <string name="profile_coins">Монеты Amino</string>
 </resources>
