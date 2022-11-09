@@ -1,4 +1,4 @@
-package ua.ilyadreamix.m3amino.rv
+package ua.ilyadreamix.m3amino.recycler
 
 import android.app.Activity
 import android.content.Intent
@@ -29,13 +29,13 @@ class CommunityItemAdapter(
             val context = communityItemView.root.context
             val root = communityItemView.root
 
-            val loadingIcon = AppCompatResources.getDrawable(context, R.drawable.ic_no_image)
+            val loadingIcon = AppCompatResources.getDrawable(context, R.drawable.pad_ic_bad_image)
             loadingIcon!!.setTint(MaterialColors.getColor(root, AR.attr.colorOnSurfaceVariant))
 
             Glide.with(root).asBitmap()
                 .load(item.icon!!.replace("http://", "https://"))
                 .dontTransform()
-                .error(R.drawable.ic_cross)
+                .error(loadingIcon)
                 .placeholder(loadingIcon)
                 .into(communityItemView.communityIcon)
 

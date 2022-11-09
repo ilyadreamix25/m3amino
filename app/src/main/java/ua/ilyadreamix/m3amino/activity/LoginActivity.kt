@@ -16,7 +16,7 @@ import ua.ilyadreamix.m3amino.http.request.AuthRequest
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.ResponseState
 import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
-import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+import ua.ilyadreamix.m3amino.http.utility.AminoSPUtility
 import java.net.UnknownHostException
 
 class LoginActivity: M3AminoActivity() {
@@ -129,13 +129,14 @@ class LoginActivity: M3AminoActivity() {
                     )
                 }
             } else {
-                AminoSessionUtility.saveLoginData(
-                    it.data!!.secret,
-                    it.data.sid,
-                    deviceId,
-                    it.data.userProfile.uid!!,
-                    emailET.text.toString()
+                val loginData = AminoSPUtility.AminoSession(
+                    secret = it.data!!.secret,
+                    sessionId = it.data.sid,
+                    deviceId = deviceId,
+                    userId = it.data.userProfile.uid,
+                    email = emailET.text.toString()
                 )
+                AminoSPUtility.saveLoginData(loginData)
 
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)

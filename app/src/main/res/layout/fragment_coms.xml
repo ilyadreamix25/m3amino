@@ -7,7 +7,6 @@
     tools:context=".fragment.ComsFragment"
     android:layout_marginBottom="90dp">
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coms_content"
         android:layout_width="match_parent"
@@ -53,6 +52,35 @@
             app:spanCount="3"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:visibility="invisible"/>
+
+        <!-- Error -->
+        <LinearLayout
+            android:id="@+id/coms_loading_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:src="@drawable/ic_bad_image"
+                app:tint="?colorOnBackground"
+                android:contentDescription="@string/error"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:drawablePadding="14dp"
+                android:text="@string/com_getting_error"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

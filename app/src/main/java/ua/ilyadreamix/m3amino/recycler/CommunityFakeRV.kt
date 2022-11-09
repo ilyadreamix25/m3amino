@@ -1,4 +1,4 @@
-package ua.ilyadreamix.m3amino.rv
+package ua.ilyadreamix.m3amino.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

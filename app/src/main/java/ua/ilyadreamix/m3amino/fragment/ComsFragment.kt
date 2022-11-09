@@ -24,8 +24,9 @@ import ua.ilyadreamix.m3amino.http.model.Community
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.CommunityRequest
 import ua.ilyadreamix.m3amino.http.request.ResponseState
-import ua.ilyadreamix.m3amino.rv.CommunityFakeItemAdapter
-import ua.ilyadreamix.m3amino.rv.CommunityItemAdapter
+import ua.ilyadreamix.m3amino.http.utility.AminoSPUtility
+import ua.ilyadreamix.m3amino.recycler.CommunityFakeItemAdapter
+import ua.ilyadreamix.m3amino.recycler.CommunityItemAdapter
 import kotlin.random.Random
 
 class ComsFragment : Fragment() {
@@ -44,7 +45,12 @@ class ComsFragment : Fragment() {
         alerts = Alerts(requireActivity())
 
         setInsets()
-        insertFakeData()
+
+        val lastLoginCache = AminoSPUtility.getLastLoginCache()
+        val communitiesSize = lastLoginCache.communitiesSize
+
+        if (communitiesSize == 0) insertFakeData()
+        else insertFakeData(listOf(1..communitiesSize).flatten())
 
         makeRequest().observe(requireActivity()) {
             if (it.state == ResponseState.BAD) {
@@ -57,6 +63,11 @@ class ComsFragment : Fragment() {
                 adapter = CommunityItemAdapter(communities)
 
                 insertCommunities()
+
+                if (communitiesSize == 0)
+                    AminoSPUtility.saveLastLoginCache(
+                        AminoSPUtility.AminoLastLoginCache(communitiesSize)
+                    )
             }
         }
 
@@ -71,13 +82,17 @@ class ComsFragment : Fragment() {
 
     private fun makeRequest(): LiveData<BaseResponse<CommunitiesResponseModel>> =
         liveData {
-            val requester = CommunityRequest(
-                acceptLanguage = getString(R.string.language),
-                ndcLang = getString(R.string.ndc_language)
-            )
-            val response = requester.getAccountCommunities()
+            try {
+                val requester = CommunityRequest(
+                    acceptLanguage = getString(R.string.language),
+                    ndcLang = getString(R.string.ndc_language)
+                )
+                val response = requester.getAccountCommunities()
 
-            emit(response)
+                emit(response)
+            } catch (_: Exception) {
+                hideEverythingAndShowError()
+            }
         }
 
     private fun getRandomFakeData() = listOf(1..Random.nextInt(15)).flatten()
@@ -90,36 +105,54 @@ class ComsFragment : Fragment() {
         }
     }
 
-    private fun insertFakeData() {
+    private fun insertFakeData(size: List<Int> = getRandomFakeData()) {
         binding.comsFakeRv.addItemPadding()
         binding.comsFakeRv.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.comsFakeRv.adapter = CommunityFakeItemAdapter(getRandomFakeData())
+        binding.comsFakeRv.adapter = CommunityFakeItemAdapter(size)
     }
 
-    private fun insertCommunities() {
+    private fun hideEverythingAndShowError() {
+        hideFakeRv {
+            binding.comsLoadingError.apply {
+                alpha = 0f
+                visibility = View.VISIBLE
 
-        binding.comsRv.addItemPadding()
-        binding.comsRv.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.comsRv.adapter = adapter
+                animate()
+                    .alpha(1f)
+                    .setDuration(150)
+                    .setListener(null)
+            }
+        }
+    }
 
+    private fun hideFakeRv(onEnd: () -> Unit = {}) {
         binding.comsFakeRv.animate()
             .alpha(0f)
             .setDuration(150)
             .setListener(object: AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     binding.comsFakeRv.visibility = View.GONE
-
-                    binding.comsRv.apply {
-                        alpha = 0f
-                        visibility = View.VISIBLE
-
-                        animate()
-                            .alpha(1f)
-                            .setDuration(150)
-                            .setListener(null)
-                    }
+                    onEnd()
                 }
             })
+    }
+
+    private fun insertCommunities() {
+        binding.comsRv.addItemPadding()
+        binding.comsRv.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.comsRv.adapter = adapter
+
+        hideFakeRv {
+            binding.comsRv.apply {
+                alpha = 0f
+                visibility = View.VISIBLE
+
+                animate()
+                    .alpha(1f)
+                    .setDuration(150)
+                    .setListener(null)
+            }
+        }
     }
 
     private fun RecyclerView.addItemPadding() {

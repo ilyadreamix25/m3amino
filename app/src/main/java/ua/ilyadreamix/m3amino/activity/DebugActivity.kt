@@ -10,7 +10,7 @@ import ua.ilyadreamix.m3amino.BuildConfig
 import ua.ilyadreamix.m3amino.R
 import ua.ilyadreamix.m3amino.databinding.ActivityDebugBinding
 import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
-import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+import ua.ilyadreamix.m3amino.http.utility.AminoSPUtility
 
 
 class DebugActivity : M3AminoActivity() {
@@ -33,7 +33,7 @@ class DebugActivity : M3AminoActivity() {
 
     private fun setButtons() {
         binding.debugSetAuthStatus1.setOnClickListener {
-            AminoSessionUtility.setLoginTime(1L)
+            AminoSPUtility.setLoginTime(1L)
         }
         binding.debugGotoSplash.setOnClickListener {
             val intent = Intent(this, SplashActivity::class.java)
@@ -43,7 +43,7 @@ class DebugActivity : M3AminoActivity() {
     }
 
     private fun setAminoInfo() {
-        val sessionData = AminoSessionUtility.getSessionData()
+        val sessionData = AminoSPUtility.getSessionData()
 
         setProps(binding.debugUa, AminoRequestUtility.generateUserAgent())
         setProps(binding.debugLastLogin, sessionData.lastLogin.toString())
@@ -85,6 +85,6 @@ class DebugActivity : M3AminoActivity() {
             BuildConfig.VERSION_NAME,
             BuildConfig.VERSION_CODE
         )
-        binding.debugAuthStatus.text = AminoSessionUtility.getLoginStatus().toString()
+        binding.debugAuthStatus.text = AminoSPUtility.getLoginStatus().toString()
     }
 }

@@ -5,14 +5,14 @@ import okhttp3.*
 import okio.Buffer
 import okio.internal.commonToUtf8String
 import ua.ilyadreamix.m3amino.http.utility.AminoRequestUtility
-import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+import ua.ilyadreamix.m3amino.http.utility.AminoSPUtility
 
 class AminoRequestInterceptor(
     private val acceptLanguage: String,
     private val ndcLang: String
 ): Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val sessionData = AminoSessionUtility.getSessionData()
+        val sessionData = AminoSPUtility.getSessionData()
         val request = chain.request()
         var builder = request.newBuilder()
 

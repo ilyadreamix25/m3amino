@@ -14,8 +14,8 @@ android {
         targetSdk = 33
         applicationId = "ua.ilyadreamix.m3amino"
         applicationIdSuffix = "indev"
-        versionCode = 11
-        versionName = "1.072"
+        versionCode = 12
+        versionName = "1.073"
     }
 
     buildTypes {
@@ -66,6 +66,7 @@ val okHttp3LogVersion: String by rootProject.extra
 // Hash
 val commonsCodecVersion: String by rootProject.extra
 val commonsLangVersion: String by rootProject.extra
+val swipeRefreshLayoutVersion: String by rootProject.extra
 
 dependencies {
     // UI
@@ -79,6 +80,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${navVersion}")
     implementation("androidx.navigation:navigation-ui-ktx:${navVersion}")
     implementation("com.facebook.shimmer:shimmer:${shimmerVersion}")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}")
 
     // Live data and view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}")

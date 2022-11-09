@@ -56,4 +56,6 @@
     <string name="com_my_coms">Мои сообщества</string>
     <string name="debug_set_auth_status_1">Статус входа 1</string>
     <string name="debug_goto_splash">Перейти к Splash</string>
+    <string name="error">Ошибка</string>
+    <string name="com_getting_error">В данный момент мы не можем получить сообщества</string>
 </resources>

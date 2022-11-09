@@ -13,7 +13,8 @@ import ua.ilyadreamix.m3amino.http.model.LoginEmailResponseModel
 import ua.ilyadreamix.m3amino.http.request.AuthRequest
 import ua.ilyadreamix.m3amino.http.request.BaseResponse
 import ua.ilyadreamix.m3amino.http.request.ResponseState
-import ua.ilyadreamix.m3amino.http.utility.AminoSessionUtility
+import ua.ilyadreamix.m3amino.http.utility.AminoSPUtility
+import java.net.UnknownHostException
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : M3AminoActivity() {
@@ -22,7 +23,7 @@ class SplashActivity : M3AminoActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AminoSessionUtility.init(this)
+        AminoSPUtility.init(this)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         val view = binding.root
@@ -31,13 +32,13 @@ class SplashActivity : M3AminoActivity() {
 
         binding.splashShimmer.startShimmer()
 
-        val loginStatus = AminoSessionUtility.getLoginStatus()
-        val data = AminoSessionUtility.getSessionData()
+        val loginStatus = AminoSPUtility.getLoginStatus()
+        val data = AminoSPUtility.getSessionData()
 
         Log.d("SplashActivity", "Auth status: $loginStatus")
 
         when (loginStatus) {
-            AminoSessionUtility.LOGIN_STATUS_EXPIRED -> {
+            AminoSPUtility.LOGIN_STATUS_EXPIRED -> {
                 val loginEmailLiveData: LiveData<BaseResponse<LoginEmailResponseModel>> = liveData {
                     val requester = AuthRequest(
                         acceptLanguage = getString(R.string.language),
@@ -52,6 +53,14 @@ class SplashActivity : M3AminoActivity() {
                         )
 
                         emit(response)
+                    } catch (_: UnknownHostException) {
+                        Toast.makeText(
+                            this@SplashActivity,
+                            getString(R.string.check_internet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        startLogin()
                     } catch (error: Exception) {
                         Log.e("SplashActivity", "Login data: $data")
                         Log.e("SplashActivity", "Auto-login error", error)
@@ -71,19 +80,21 @@ class SplashActivity : M3AminoActivity() {
                         Toast.makeText(this, it.error!!.message, Toast.LENGTH_SHORT).show()
                         startLogin()
                     } else {
-                        AminoSessionUtility.saveLoginData(
-                            data.secret!!,
-                            it.data!!.sid,
-                            data.deviceId!!,
-                            it.data.userProfile.uid!!,
-                            data.email!!
+                        val loginData = AminoSPUtility.AminoSession(
+                            secret = data.secret,
+                            sessionId = it.data!!.sid,
+                            deviceId = data.deviceId,
+                            userId = it.data.userProfile.uid,
+                            email = data.email
                         )
+                        AminoSPUtility.saveLoginData(loginData)
+
                         startHome()
                     }
                 }
             }
-            AminoSessionUtility.LOGIN_STATUS_NONE -> { startLogin() }
-            AminoSessionUtility.LOGIN_STATUS_SID -> { startHome() }
+            AminoSPUtility.LOGIN_STATUS_NONE -> { startLogin() }
+            AminoSPUtility.LOGIN_STATUS_SID -> { startHome() }
         }
     }
 
